@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: server
+        image: navyzet/hipster-frontend:v0.0.2
+        env:
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "127.0.0.1"
+        - name: CURRENCY_SERVICE_ADDR
+          value: "127.0.0.1"
+        - name: CART_SERVICE_ADDR
+          value: "127.0.0.1"
+        - name: RECOMMENDATION_SERVICE_ADDR
+          value: "127.0.0.1"
+        - name: CHECKOUT_SERVICE_ADDR
+          value: "127.0.0.1"
+        - name: AD_SERVICE_ADDR
+          value: "127.0.0.1"
+        - name: SHIPPING_SERVICE_ADDR
+          value: "127.0.0.1"
