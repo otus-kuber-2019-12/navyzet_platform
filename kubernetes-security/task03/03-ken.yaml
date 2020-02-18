@@ -10,9 +10,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: view
-  namespace: dev
 subjects:
-- kind: User
+- kind: ServiceAccount
   name: ken
   namespace: dev
 roleRef:
