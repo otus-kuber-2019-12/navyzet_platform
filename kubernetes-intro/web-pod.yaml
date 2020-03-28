@@ -8,6 +8,13 @@ spec:
   containers:
   - name: web
     image: navyzet/otus_nginx:v0.1
+    livenessProbe:
+      tcpSocket:
+        port: 8000
+    readinessProbe:
+      httpGet:
+        path: /index.html
+        port: 8000
     volumeMounts:
     - name: app
       mountPath: "/app"
