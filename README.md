@@ -19,3 +19,11 @@ navyzet Platform repository
 - Добавлен Deployment приложения MinIO kubernetes-volumes/minio-headless-service.yaml
 - Добавлен сервис для приложения MinIO kubernetes-volumes/minio-headless-service.yaml
 - Переменные окружения с приватными данными помещены в secret
+
+# Домашняя работа по теме "Шаблонизация манифестов Kubernetes"
+- Поднят кластер Kubernetes в Google cloud
+- установлен helm chart ingress-nginx/ingress-nginx 3.7.1
+- Установлен cert-manager
+- Создан ресурс clusterissuer для работы с letsencrypt
+- Развёрнут chartmuseum
+- Развёрнут harbor

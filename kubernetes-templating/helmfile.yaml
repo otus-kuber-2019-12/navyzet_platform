@@ -1,0 +1,66 @@
+repositories:
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+
+  - name: jetstack
+    url: https://charts.jetstack.io
+
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+  - name: harbor
+    url: https://helm.goharbor.io
+
+helmDefaults:
+  wait: true
+
+releases:
+  - name: ingress-nginx
+    namespace: ingress-nginx
+    createNamespace: true
+    chart: ingress-nginx/ingress-nginx
+    version: 3.7.1
+
+  - name: cert-manager
+    createNamespace: true
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version: v1.0.3
+    values:
+      - installCRDs: true
+    hooks:
+     - events: ["postsync"]
+       showlogs: true
+       command: "bash"
+       args: ["-c", "sleep 5 && kubectl apply -f cert-manager/letsencrypt-prod-cluster-issuer.yaml"]
+     - events: ["preuninstall"]
+       showlogs: true
+       command: "kubectl"
+       args: ["delete", "-f", "cert-manager/letsencrypt-prod-cluster-issuer.yaml"]
+
+  - name: chartmuseum
+    namespace: chartmuseum
+    createNamespace: true
+    chart: stable/chartmuseum
+    version: 2.14.0
+    values:
+      - chartmuseum/values.yaml
+      - ingress:
+          hosts:
+            - name: chartmuseum.{{ env "EXTERNAL_IP" }}.nip.io
+              tlsSecret: chartmuseum.{{ env "EXTERNAL_IP" }}.nip.io
+
+  - name: harbor
+    namespace: harbor
+    createNamespace: true
+    chart: harbor/harbor
+    version: 1.5.0
+    values:
+      - harbor/values.yaml
+      - ingress:
+          hosts:
+            - externalURL: https://harbor.{{ env "EXTERNAL_IP" }}.nip.io
+            - expose:
+                ingress:
+                  hosts:
+                    core: harbor.{{ env "EXTERNAL_IP" }}.nip.io
