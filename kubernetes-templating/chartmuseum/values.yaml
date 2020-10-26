@@ -271,7 +271,7 @@ ingress:
 ## Must be provided if Ingress is enabled
 ##
   hosts:
-    - name: chartmuseum.35.229.81.28.nip.io
+    - name: chartmuseum.34.73.238.93.nip.io
       path: /
 
       ## Set this to true in order to enable TLS on the ingress record
@@ -279,7 +279,7 @@ ingress:
 
       ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
       ## Secrets must be added manually to the namespace
-      tlsSecret: chartmuseum.35.229.81.28.nip.io
+      tlsSecret: chartmuseum.34.73.238.93.nip.io
 
 # Adding secrets to tiller is not a great option, so If you want to use an existing
 # secret that contains the json file, you can use the following entries

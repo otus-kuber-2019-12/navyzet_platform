@@ -33,7 +33,7 @@ expose:
       notarySecretName: ""
   ingress:
     hosts:
-      core: harbor.35.229.81.28.nip.io
+      core: harbor.34.73.238.93.nip.io
       notary: notary.harbor.domain
     # set to the type of ingress controller if it has specific requirements.
     # leave as `default` for most ingress controllers.
@@ -109,7 +109,7 @@ expose:
 # the IP address of k8s node
 #
 # If Harbor is deployed behind the proxy, set it as the URL of proxy
-externalURL: https://harbor.35.229.81.28.nip.io
+externalURL: https://harbor.34.73.238.93.nip.io
 
 # The internal TLS used for harbor components secure communicating. In order to enable https
 # in each components tls cert files need to provided in advance.

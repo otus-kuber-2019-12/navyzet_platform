@@ -45,10 +45,6 @@ releases:
     version: 2.14.0
     values:
       - chartmuseum/values.yaml
-      - ingress:
-          hosts:
-            - name: chartmuseum.{{ env "EXTERNAL_IP" }}.nip.io
-              tlsSecret: chartmuseum.{{ env "EXTERNAL_IP" }}.nip.io
 
   - name: harbor
     namespace: harbor
@@ -57,10 +53,3 @@ releases:
     version: 1.5.0
     values:
       - harbor/values.yaml
-      - ingress:
-          hosts:
-            - externalURL: https://harbor.{{ env "EXTERNAL_IP" }}.nip.io
-            - expose:
-                ingress:
-                  hosts:
-                    core: harbor.{{ env "EXTERNAL_IP" }}.nip.io
